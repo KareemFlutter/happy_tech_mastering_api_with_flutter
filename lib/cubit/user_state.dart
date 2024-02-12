@@ -1,45 +1,48 @@
-import 'package:happy_tech_mastering_api_with_flutter/models/user_model.dart';
+import 'package:happy_tech_mastering_api_with_flutter/models/profile_model.dart';
 
 class UserState {}
 
+//! Sign In
 final class UserInitial extends UserState {}
 
-final class SignInSuccess extends UserState {}
+final class SignInSuccessState extends UserState {}
 
-final class UploadProfilePic extends UserState {}
+final class SignInLoadingState extends UserState {}
 
-final class SignInLoading extends UserState {}
+final class SignInFailureState extends UserState {
+  final String errorMessage;
 
-final class SignInFailure extends UserState {
-  final String errMessage;
-
-  SignInFailure({required this.errMessage});
+  SignInFailureState({required this.errorMessage});
 }
 
-final class SignUpSuccess extends UserState {
+//! Sign Up
+final class SignUpSuccessState extends UserState {
   final String message;
 
-  SignUpSuccess({required this.message});
+  SignUpSuccessState({required this.message});
 }
 
-final class SignUpLoading extends UserState {}
+final class SignUpLoadingState extends UserState {}
 
-final class SignUpFailure extends UserState {
-  final String errMessage;
+final class SignUpFailureState extends UserState {
+  final String errorMessage;
 
-  SignUpFailure({required this.errMessage});
+  SignUpFailureState({required this.errorMessage});
 }
 
-final class GetUserSuccess extends UserState {
-  final UserModel user;
+class UploadProfilePicture extends UserState {}
 
-  GetUserSuccess({required this.user});
+//! getUserData
+class GetUserDataSuccessState extends UserState {
+  final UserModel userModel;
+
+  GetUserDataSuccessState({required this.userModel});
 }
 
-final class GetUserLoading extends UserState {}
+class GetUserDataFailureState extends UserState {
+  final String message;
 
-final class GetUserFailure extends UserState {
-  final String errMessage;
-
-  GetUserFailure({required this.errMessage});
+  GetUserDataFailureState({required this.message});
 }
+
+class GetUserDataLoadingState extends UserState {}

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
@@ -5,6 +6,8 @@ class CacheHelper {
 
 //! Here The Initialize of cache .
   init() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    CacheHelper().init();
     sharedPreferences = await SharedPreferences.getInstance();
   }
 

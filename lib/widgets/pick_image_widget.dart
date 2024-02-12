@@ -17,19 +17,18 @@ class PickImageWidget extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return SizedBox(
-          width: 130,
-          height: 130,
-          child: context.read<UserCubit>().profilePic == null
-              ? CircleAvatar(
-                  backgroundColor: Colors.grey.shade200,
-                  backgroundImage: const AssetImage("assets/images/avatar.png"),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        bottom: 5,
-                        right: 5,
-                        child: GestureDetector(
-                          onTap: () async {},
+            width: 130,
+            height: 130,
+            child: context.read<UserCubit>().profilePic == null
+                ? CircleAvatar(
+                    backgroundColor: Colors.grey.shade200,
+                    backgroundImage:
+                        const AssetImage("assets/images/avatar.png"),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          bottom: 5,
+                          right: 5,
                           child: Container(
                             height: 50,
                             width: 50,
@@ -41,10 +40,12 @@ class PickImageWidget extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () {
                                 ImagePicker()
-                                    .pickImage(source: ImageSource.gallery)
-                                    .then((value) => context
-                                        .read<UserCubit>()
-                                        .uploadProfilePic(value!));
+                                    .pickImage(source: ImageSource.camera)
+                                    .then(
+                                      (value) => context
+                                          .read<UserCubit>()
+                                          .uploadProfilePicture(value!),
+                                    );
                               },
                               child: const Icon(
                                 Icons.camera_alt_sharp,
@@ -54,15 +55,14 @@ class PickImageWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              : CircleAvatar(
-                  backgroundImage: FileImage(
-                      File(context.read<UserCubit>().profilePic!.path)),
-                ),
-        );
+                      ],
+                    ),
+                  )
+                : CircleAvatar(
+                    backgroundImage: FileImage(File(
+                      context.read<UserCubit>().profilePic!.path,
+                    )),
+                  ));
       },
     );
   }
